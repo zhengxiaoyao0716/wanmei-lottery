@@ -16,6 +16,12 @@ body::before {
     background-position: 50% 50%;
     content: "";
 }
+#particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
 /* pendant */
 
@@ -36,11 +42,12 @@ body::before {
     position: fixed;
 }
 .-control->* {
-    padding: 15px;
+    text-decoration: unset;
     border-radius: 30px;
     box-shadow: 0 0 15px 0 #666;
-    text-decoration: unset;
+    border: 15px solid #fff;
     background: #fff;
+    margin: 10px;
 }
 .-control->*.hide {
     display: none;
@@ -52,6 +59,9 @@ body::before {
     pointer-events: none;
     box-shadow: 0 0 3px 0 #666;
 }
+.-control->a>* {
+    pointer-events: none;
+}
 
 /* lottery */
 
@@ -60,7 +70,7 @@ body::before {
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .-lottery-::before {
     position: absolute;
@@ -82,7 +92,6 @@ body::before {
 }
 .-lottery->.describe {
     font-size: 2em;
-    margin: 0;
 }
 .-lottery->.gallery {
     color: red;
@@ -90,6 +99,7 @@ body::before {
     line-height: 1.5em;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     flex-wrap: wrap;
     overflow-y: auto;
 }

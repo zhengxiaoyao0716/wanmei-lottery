@@ -11,39 +11,39 @@
 const config = { // eslint-disable-line no-unused-vars
     // 挂件
     pendants: [
-        {
-            name: 'logo',
-            image: './static/image/pendant/logo.png',
-            style: {
-                width: '300px',
-                left: '20%',
-                top: '12%',
-            },
-        },
-        {
-            name: 'cg',
-            image: './static/image/pendant/cg.png',
-            style: {
-                width: '1200px',
-                right: '12%',
-                top: '8%',
-            },
-        },
-        {
-            name: '恭喜中奖',
-            image: './static/image/pendant/恭喜中奖.png',
-            style: {
-                right: '3%',
-                bottom: '3%',
-            },
-        },
+        // {
+        //     name: 'logo',
+        //     image: './static/image/pendant/logo.png',
+        //     style: {
+        //         width: '300px',
+        //         left: '20%',
+        //         top: '12%',
+        //     },
+        // },
+        // {
+        //     name: 'cg',
+        //     image: './static/image/pendant/cg.png',
+        //     style: {
+        //         width: '1200px',
+        //         right: '12%',
+        //         top: '8%',
+        //     },
+        // },
+        // {
+        //     name: '恭喜中奖',
+        //     image: './static/image/pendant/恭喜中奖.png',
+        //     style: {
+        //         right: '3%',
+        //         bottom: '3%',
+        //     },
+        // },
     ],
 
     // 控制器
     control: {
         style: {
             left: '6%',
-            top: '15%',
+            bottom: '12%',
         },
     },
 
@@ -51,10 +51,11 @@ const config = { // eslint-disable-line no-unused-vars
     lottery: {
         title: '射雕英雄传手游庆功宴抽奖',
         style: {
-            height: '60%',
+            minHeight: '30%',
+            maxHeight: '60%',
             maxWidth: '60%',
             left: '10%',
-            bottom: '12%',
+            top: '15%',
         },
     },
 
@@ -73,11 +74,11 @@ const config = { // eslint-disable-line no-unused-vars
     turns: [
         { name: '一等奖', quota: 3, },
         { name: '二等奖', quota: 10, },
-        { name: '三等奖', quota: 20, },
+        { name: '三等奖', quota: 30, },
     ],
 
     // 数据集
-    dataset: new Array(100).fill().map((_, i) => ({ name: `Name_${i}`, code: `code_${i}`, })),
+    dataset: new Array(100).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}`, })),
 };
 window.config = config;
 

@@ -3,7 +3,7 @@
   const param = {
     "particles": {
       "number": {
-        "value": 16,
+        "value": 300,
         "density": {
           "enable": true,
           "value_area": 800
@@ -13,7 +13,7 @@
         "value": "#ff7a8a"
       },
       "shape": {
-        "type": "edge",
+        "type": "star",
         "stroke": {
           "width": 0,
           "color": "#000000"
@@ -38,11 +38,11 @@
         }
       },
       "size": {
-        "value": 16.03412060865523,
+        "value": 10,
         "random": true,
         "anim": {
-          "enable": true,
-          "speed": 16,
+          "enable": false,
+          "speed": 40,
           "size_min": 0.1,
           "sync": false
         }
@@ -56,15 +56,15 @@
       },
       "move": {
         "enable": true,
-        "speed": 3,
-        "direction": "bottom",
-        "random": true,
+        "speed": 16,
+        "direction": "none",
+        "random": false,
         "straight": false,
         "out_mode": "out",
         "bounce": false,
         "attract": {
           "enable": false,
-          "rotateX": 800,
+          "rotateX": 600,
           "rotateY": 1200
         }
       }
@@ -73,8 +73,8 @@
       "detect_on": "canvas",
       "events": {
         "onhover": {
-          "enable": false,
-          "mode": "bubble"
+          "enable": true,
+          "mode": "repulse"
         },
         "onclick": {
           "enable": true,

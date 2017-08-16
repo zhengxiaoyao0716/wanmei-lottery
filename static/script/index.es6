@@ -80,15 +80,16 @@ const unitTests = {
             }
         }
 
-        document.querySelector('#lottery').classList.add('hide');
         document.querySelector('#roller').classList.remove('hide');
         sorted = reorder(dataset);
         let timestamp;
         rollerTimer = timer(config.roller.freq, () => {
+            rollerSE.play();
             timestamp = new Date().getTime();
             const users = sample(sorted, turnData.quota, timestamp);
             roller.replace(...users);
         }, () => {
+            lotterySE.play();
             record[record.length - 1].timestamp = timestamp;
             const users = sample(sorted, turnData.quota, timestamp);
             result[turnData.name] = users;
@@ -102,7 +103,6 @@ const unitTests = {
         if (!rollerTimer) {
             return;
         }
-        document.querySelector('#lottery').classList.remove('hide');
         document.querySelector('#roller').classList.add('hide');
         rollerTimer.stop();
         rollerTimer = null;
@@ -128,7 +128,7 @@ const unitTests = {
         `], { type: 'application/x-javascript;charset=utf-8' }));
         a.click();
 
-        a.download = 'result.txt';
+        a.download = '抽奖结果.txt';
         a.href = URL.createObjectURL(new Blob([((result) => {
             const eol = '\r\n';
             let content = `抽奖结果：${eol}`;

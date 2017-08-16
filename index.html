@@ -23,22 +23,34 @@
         <script src="./static/script/pendant.es6"></script>
     </div>
     <div id="control" class="-control-">
-        <a id="last" title="上一轮" href="javascript:;"><span><=</span></a>
-        <a id="start" title="开始" href="javascript:;"><span>||></span></a>
-        <a id="stop" class="hide" title="停止" href="javascript:;"><span>ロ</span></a>
-        <a id="next" title="下一轮" href="javascript:;"><span>=></span></a>
-        <a id="save" title="保存" href="javascript:;"><span>[ ]</span></a>
+        <a id="last" title="上一轮" href="javascript:;">
+            <embed src="./static/image/control/next.svg" style="transform: scaleX(-1);" width="12" >
+        </a>
+        <a id="start" title="开始" href="javascript:;">
+            <embed src="./static/image/control/start.svg" width="12" >
+        </a>
+        <a id="stop" class="hide" title="停止" href="javascript:;">
+            <embed src="./static/image/control/stop.svg" width="12" >
+        </a>
+        <a id="next" title="下一轮" href="javascript:;">
+            <embed src="./static/image/control/next.svg" width="12" >
+        </a>
+        <a id="save" title="保存" href="javascript:;">
+            <embed src="./static/image/control/save.svg" width="12" >
+        </a>
         <script src="./static/script/control.es6"></script>
     </div>
-    <div id="lottery" class="-lottery- hide">
+    <div id="lottery" class="-lottery-">
         <script src="./static/script/lottery.es6"></script>
     </div>
-    <div id="roller" class="-roller-">
+    <div id="roller" class="-roller- hide">
         <script src="./static/script/roller.es6"></script>
     </div>
 
     <!-- audio -->
-    <audio id="bgm" src="./static/audio/bgm.mp3" controls loop autoplay>bgm.mp3</audio>
+    <audio id="rollerSE" src="./static/audio/ui_quest.mp3"></audio>
+    <audio id="lotterySE" src="./static/audio/levelup01.mp3"></audio>
+    <audio id="bgm" src="./static/audio/bgm.mp3" controls loop autoplay><script>bgm.volume=0.8</script></audio>
     <!-- script -->
     <div style="display: none;">
         <script src="./static/script/lib/seedrandom.min.js"></script>
