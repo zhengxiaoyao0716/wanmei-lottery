@@ -114,7 +114,7 @@ const unitTests = {
     let unsavedTip = '数据尚未备份';
     const save = () => {
         const a = document.createElement('a');
-        
+
         const random = new Math.seedrandom(mSeed);
         const backup = { mSeed, check: [random(), random(), random(),], dataset: config.dataset }; // eslint-disable-line no-undef
         a.download = 'backup.js';
@@ -154,4 +154,9 @@ const unitTests = {
             container.style[key] = style[key];
         }
     }));
+    document.head.appendChild(((style)=>{
+        style.innerHTML = `body::before { background-image: url(${config.body.bgi}); }`; // eslint-disable-line no-undef
+        return style;
+    })(document.createElement('style')));
+    bgm.src = config.body.bgm; // eslint-disable-line no-undef
 }
