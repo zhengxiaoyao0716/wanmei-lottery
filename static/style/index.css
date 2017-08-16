@@ -1,0 +1,154 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-family: arial,tahoma,'Microsoft Yahei','\5b8b\4f53',sans-serif;
+}
+body::before {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, #90afd5, #fff) no-repeat;
+    background: url(../image/bgi.jpg) no-repeat;
+    background-size: contain;
+    /* background-size: cover; */
+    background-position: 50% 50%;
+    content: "";
+}
+
+/* pendant */
+
+.-pendant- {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+.-pendant->* {
+    position: fixed;
+}
+
+/* control */
+
+.-control- {
+    position: fixed;
+}
+.-control->* {
+    padding: 15px;
+    border-radius: 30px;
+    box-shadow: 0 0 15px 0 #666;
+    text-decoration: unset;
+    background: #fff;
+}
+.-control->*.hide {
+    display: none;
+}
+.-control->*:hover {
+    box-shadow: 0 0 6px 0 #666;
+}
+.-control->*[disabled] {
+    pointer-events: none;
+    box-shadow: 0 0 3px 0 #666;
+}
+
+/* lottery */
+
+.-lottery- {
+    position: fixed;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.-lottery-::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: -15px;
+    top: -15px;
+    background: #fff;
+    border-radius: 30px;
+    border: 30px solid #fff;
+    box-shadow: 0 0 12px 0 #666;
+    opacity: 0.8;
+    content: "";
+}
+.-lottery->.title {
+    color: red;
+    font-size: 2.5em;
+}
+.-lottery->.describe {
+    font-size: 2em;
+    margin: 0;
+}
+.-lottery->.gallery {
+    color: red;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+.-lottery->.gallery>* {
+    margin: 0 12px;
+}
+
+/* roller */
+
+.-roller- {
+    position: fixed;
+    font-size: 1.5em;
+    text-align: center;
+    display: flex;
+}
+.-roller-::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: -6px;
+    top: -6px;
+    background: #fff;
+    border-radius: 12px;
+    border: 12px solid #fff;
+    box-shadow: 0 0 12px 0 #666;
+    opacity: 0.8;
+    content: "";
+}
+.-roller->div {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.-roller->div>* {
+    margin: 0;
+}
+
+/* audio */
+
+audio#bgm {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    margin:10px;
+    opacity: 0.3;
+}
+audio#bgm:hover {
+    opacity: 1;
+    -webkit-transition: opacity 1s ease;
+    -moz-transition: opacity 1s ease;
+    transition: opacity 1s ease;
+}
+
+.-roller-.hide {
+    opacity: 0;
+    -webkit-transition: opacity 2s ease;
+    -moz-transition: opacity 2s ease;
+    transition: opacity 2s ease;
+}

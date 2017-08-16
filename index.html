@@ -1,0 +1,49 @@
+<!-- 抽奖 -->
+<!-- @author: zhengxiaoyao0716 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link rel="shortcut icon" href="http://os.zheng0716.com/static/image/favicon.ico" />
+    <title>抽奖</title>
+    <!-- style -->
+    <link href="./static/style/index.css" rel="stylesheet" />
+    <script src="./static/script/config.es6"></script>
+</head>
+
+<body>
+    <div id="particles">
+        <script src="./static/script/lib/particles.min.js"></script>
+        <script src="./static/script/particles.es6"></script>
+    </div>
+    <div id="pendant" class="-pendant-">
+        <script src="./static/script/pendant.es6"></script>
+    </div>
+    <div id="control" class="-control-">
+        <a id="last" title="上一轮" href="javascript:;"><span><=</span></a>
+        <a id="start" title="开始" href="javascript:;"><span>||></span></a>
+        <a id="stop" class="hide" title="停止" href="javascript:;"><span>ロ</span></a>
+        <a id="next" title="下一轮" href="javascript:;"><span>=></span></a>
+        <a id="save" title="保存" href="javascript:;"><span>[ ]</span></a>
+        <script src="./static/script/control.es6"></script>
+    </div>
+    <div id="lottery" class="-lottery- hide">
+        <script src="./static/script/lottery.es6"></script>
+    </div>
+    <div id="roller" class="-roller-">
+        <script src="./static/script/roller.es6"></script>
+    </div>
+
+    <!-- audio -->
+    <audio id="bgm" src="./static/audio/bgm.mp3" controls loop autoplay>bgm.mp3</audio>
+    <!-- script -->
+    <div style="display: none;">
+        <script src="./static/script/lib/seedrandom.min.js"></script>
+        <script src="./static/script/index.es6"></script>
+    </div>
+</body>
+
+</html>
