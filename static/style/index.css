@@ -11,9 +11,9 @@ body::before {
     height: 100%;
     background: linear-gradient(120deg, #90afd5, #fff) no-repeat;
     /* background: url(../image/bgi.jpg) no-repeat; */
-    background-size: contain;
-    /* background-size: cover; */
-    background-position: 50% 50%;
+    /* background-size: contain; */
+    background-size: cover;  
+    /* background-position: 50% 50%; */
     content: "";
 }
 #particles {
