@@ -97,8 +97,8 @@ const config = { // eslint-disable-line no-unused-vars
     get dataset() { return new Array(100).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}xxx`, })); },
 
     body: {
-        bgi: './static/image/bgi.jpg',
-        bgm: './static/audio/bgm.mp3',
+        bgi: './static/image/bgi.jpg', // 背景图片
+        bgm: './static/audio/bgm.mp3', // 背景音乐
     },
 };
 window.config = config;

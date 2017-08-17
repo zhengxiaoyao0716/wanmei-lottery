@@ -90,12 +90,29 @@ const unitTests = {
             roller.replace(...users);
         }, () => {
             lotterySE.play();
+            // sample.
             record[record.length - 1].timestamp = timestamp;
             const users = sample(sorted, turnData.quota, timestamp);
             result[turnData.name] = users;
-            lottery.replace(...users);
+
+            // substrate repeat.
             const codeSet = new Set(users.map(data => data.code));
             dataset.forEach((data, index) => data != null && codeSet.has(data.code) && (dataset[index] = null));
+
+            lottery.onExchange = (index) => {
+                // exchange
+                const timestamp = new Date().getTime();
+                const user = sample(sorted, 1, timestamp)[0];
+                record[record.length - 1][`exchange_${index}`] = { timestamp };
+                users[index] = user;
+
+                // substrate repeat.
+                codeSet.add(user);
+                dataset.forEach((data, index) => data != null && codeSet.has(data.code) && (dataset[index] = null));
+
+                return user;
+            };
+            lottery.replace(...users);
         });
         rollerTimer.start();
     };
@@ -154,7 +171,7 @@ const unitTests = {
             container.style[key] = style[key];
         }
     }));
-    document.head.appendChild(((style)=>{
+    document.head.appendChild(((style) => {
         style.innerHTML = `body::before { background-image: url(${config.body.bgi}); }`; // eslint-disable-line no-undef
         return style;
     })(document.createElement('style')));

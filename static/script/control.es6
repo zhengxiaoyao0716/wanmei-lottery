@@ -9,9 +9,13 @@ window.control = control;
 
 {
     const container = document.querySelector('#control');
+    const KeyCode = { space: 32, left: 37, right: 39, enter: 13, };
+    const keyControl = {};
 
     const last = container.querySelector('#last');
     const next = container.querySelector('#next');
+    keyControl[KeyCode.left] = () => last.click();
+    keyControl[KeyCode.right] = () => next.click();
 
     const turns = config.turns; // eslint-disable-line no-undef
     let turn = 0;
@@ -40,17 +44,26 @@ window.control = control;
 
     const start = container.querySelector('#start');
     const stop = container.querySelector('#stop');
+    keyControl[KeyCode.space] = () => start.click();
     start.addEventListener('click', () => {
         control.onStart(turn);
+        keyControl[KeyCode.space] = () => stop.click();
         start.classList.add('hide');
         stop.classList.remove('hide');
     });
     stop.addEventListener('click', () => {
         control.onStop(turn);
+        keyControl[KeyCode.space] = () => start.click();
         stop.classList.add('hide');
         start.classList.remove('hide');
     });
 
     const save = container.querySelector('#save');
+    keyControl[KeyCode.enter] = () => save.click();
     save.addEventListener('click', () => control.onSave());
+
+    addEventListener('keydown', (e) => {
+        const handler = keyControl[e.keyCode];
+        handler && handler();
+    });
 }

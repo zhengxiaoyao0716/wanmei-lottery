@@ -2,7 +2,8 @@
 
 const lottery = {
     /** @param {Dataset} users */
-    replace: (...users) => { throw new Error('"gallery.replace" has not initialed.', users); },
+    replace: (...users) => { throw new Error(`"gallery.replace" has not initialed, users: ${JSON.stringify(users)}`); },
+    onExchange: (index) => { throw new Error(`missing handler for "lottery.onExchange" event, index: ${index}`); },
 };
 window.lottery = lottery;
 
@@ -40,10 +41,17 @@ window.lottery = lottery;
         /** @param {Dataset} users */
         const replace = (...users) => {
             ele.innerHTML = '';
-            users.forEach((data) => {
+            users.forEach((data, index) => {
                 const p = document.createElement('p');
                 ele.appendChild(p);
                 p.textContent = `${data.name} [${data.code}]`;
+                p.addEventListener('click', () => {
+                    if (!confirm(`确实要替换掉 "${data.name} [${data.code}]" 吗？`)) {
+                        return null;
+                    }
+                    data = lottery.onExchange(index);
+                    p.textContent = `${data.name} [${data.code}]`;
+                });
             });
         };
         lottery.__defineSetter__('replace', (v) => { throw new Error(`"lottery.replace" could not be change: ${v}`); });
