@@ -144,7 +144,7 @@ const unitTests = {
     };
     control.onSave = save; // eslint-disable-line no-undef
     // DEBUG 正式发布时打开这个
-    // window.onbeforeunload = () => unsavedTip;
+    window.onbeforeunload = () => unsavedTip;
 
     // 样式修正
     addEventListener('load', () => ['control', 'lottery', 'roller',].forEach((module) => {
