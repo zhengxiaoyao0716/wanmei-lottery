@@ -27,6 +27,13 @@ window.lottery = lottery;
     container.appendChild(((ele) => {
         ['load', 'hashchange'].forEach(key => addEventListener(key, () => {
             ele.textContent = '';
+            const data = config.turns[Number.parseInt(location.hash.slice(1)) || 0]; // eslint-disable-line no-undef
+            config.lottery.size.some(([quota, size]) => { // eslint-disable-line no-undef
+                if (data.quota <= quota) {
+                    ele.style.setProperty('--font-size', `${size}em`);
+                    return true;
+                }
+            });
         }));
         ele.classList.add('gallery');
 

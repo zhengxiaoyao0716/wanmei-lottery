@@ -2,7 +2,7 @@
  * 配置.
  * @typedef {{ name: string, image: string, style: CSSStyleDeclaration, }[]} Pendants
  * @typedef {{ style: CSSStyleDeclaration, }} Control
- * @typedef {{ title: string, style: CSSStyleDeclaration, }} Lottery
+ * @typedef {{ title: string, size: [[quote, size]] style: CSSStyleDeclaration, }} Lottery
  * @typedef {{ freq: number, style: CSSStyleDeclaration, }} Roller
  * @typedef {{ name: string, code: string, }[]} Dataset
  * @typedef {{ name: string, quota: number, }[]} Turns
@@ -51,9 +51,18 @@ const config = { // eslint-disable-line no-unused-vars
     // 抽奖台
     lottery: {
         title: '未配置 - xxx庆功宴抽奖',
+        size: [
+            [3, 2.5],
+            [5, 2.0],
+            [10, 1.8],
+            [15, 1.3],
+            [20, 1.2],
+            [30, 1.0],
+            [50, 0.7],
+        ],
         style: {
             minHeight: '30%',
-            maxHeight: '60%',
+            maxHeight: '64%',
             maxWidth: '60%',
             left: '10%',
             top: '15%',
@@ -75,13 +84,17 @@ const config = { // eslint-disable-line no-unused-vars
     get turns() {
         return [
             { name: '未配置 - 第一轮抽奖', quota: 3, },
-            { name: '未配置 - 第二轮抽奖', quota: 10, },
-            { name: '未配置 - 第三轮抽奖', quota: 30, },
+            { name: '未配置 - 第二轮抽奖', quota: 5, },
+            { name: '未配置 - 第三轮抽奖', quota: 10, },
+            { name: '未配置 - 第四轮抽奖', quota: 15, },
+            { name: '未配置 - 第五轮抽奖', quota: 20, },
+            { name: '未配置 - 第六轮抽奖', quota: 30, },
+            { name: '未配置 - 第七轮抽奖', quota: 50, },
         ];
     },
 
     // 数据集
-    get dataset() { return new Array(100).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}`, })); },
+    get dataset() { return new Array(100).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}xxx`, })); },
 
     body: {
         bgi: './static/image/bgi.jpg',
