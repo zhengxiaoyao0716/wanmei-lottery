@@ -80,6 +80,7 @@ const unitTests = {
             }
         }
 
+        document.querySelector('#lottery').classList.add('hide');
         document.querySelector('#roller').classList.remove('hide');
         sorted = reorder(dataset);
         let timestamp;
@@ -120,6 +121,7 @@ const unitTests = {
         if (!rollerTimer) {
             return;
         }
+        document.querySelector('#lottery').classList.remove('hide');
         document.querySelector('#roller').classList.add('hide');
         rollerTimer.stop();
         rollerTimer = null;

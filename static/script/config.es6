@@ -2,8 +2,8 @@
  * 配置.
  * @typedef {{ name: string, image: string, style: CSSStyleDeclaration, }[]} Pendants
  * @typedef {{ style: CSSStyleDeclaration, }} Control
- * @typedef {{ title: string, size: [[quote, size]] style: CSSStyleDeclaration, }} Lottery
- * @typedef {{ freq: number, style: CSSStyleDeclaration, }} Roller
+ * @typedef {{ title: string, freq: number, size: [[quote, size]] style: CSSStyleDeclaration, }} Lottery
+ * @typedef {{ freq: number, size: [[quote, size]], style: CSSStyleDeclaration, }} Roller
  * @typedef {{ name: string, code: string, }[]} Dataset
  * @typedef {{ name: string, quota: number, }[]} Turns
  * @typedef {{ bgi: string, bgm: string}} Body
@@ -51,14 +51,16 @@ const config = { // eslint-disable-line no-unused-vars
     // 抽奖台
     lottery: {
         title: '未配置 - xxx庆功宴抽奖',
+        freq: 50, // 当实在放不下时，自动滚动频率，ms
         size: [
             [3, 2.5],
             [5, 2.0],
-            [10, 1.8],
+            [10, 1.6],
             [15, 1.3],
             [20, 1.2],
             [30, 1.0],
             [50, 0.7],
+            [999, 0.7],
         ],
         style: {
             minHeight: '30%',
@@ -72,9 +74,17 @@ const config = { // eslint-disable-line no-unused-vars
     // 滚筒区域
     roller: {
         freq: 100, // ms
+        size: [
+            [3, 2.5],
+            [10, 2.0],
+            [20, 1.8],
+            [30, 1.5],
+            [50, 1.0],
+            [999, 1.0],
+        ],
         style: {
             height: '80%',
-            width: '50%',
+            minWidth: '50%',
             right: '10%',
             bottom: '10%',
         },
@@ -90,30 +100,33 @@ const config = { // eslint-disable-line no-unused-vars
             { name: '未配置 - 第五轮抽奖', quota: 20, },
             { name: '未配置 - 第六轮抽奖', quota: 30, },
             { name: '未配置 - 第七轮抽奖', quota: 50, },
+            { name: '未配置 - 第八轮抽奖', quota: 100, },
         ];
     },
 
     // 数据集
-    get dataset() { return new Array(100).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}xxx`, })); },
+    get dataset() { return new Array(160).fill().map((_, i) => ({ name: `姓名${i}`, code: `xxx${i}xxx`, })); },
 
     body: {
         bgi: './static/image/bgi.jpg', // 背景图片
         bgm: './static/audio/bgm.mp3', // 背景音乐
     },
+
+    renderUser: (data) => data.name ? `${data.name} [${data.code}]` : data.code,
 };
 window.config = config;
 
 {
+    let _title = config.lottery.title;
+    config.lottery.__defineGetter__('title', () => _title);
     // check.lottery.title
     const checkTitle = (title) => {
         if (location.search.indexOf(`config=${encodeURIComponent(title)}`) == -1) {
             throw new Error(`prevent to load a config because of mismatching title, title: "${title}", need: "config=${title}"`);
         }
+        _title = title;
     };
-    config.lottery.__defineSetter__('title', (title) => {
-        checkTitle(title);
-        config.lottery.__defineGetter__('title', () => title);
-    });
+    config.lottery.__defineSetter__('title', checkTitle);
 }
 
 {

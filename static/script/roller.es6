@@ -7,6 +7,7 @@ const roller = {
 window.roller = roller;
 
 {
+    /** @type {HTMLDivElement} */
     const container = document.querySelector('#roller');
     const newPanel = () => {
         const panel = document.createElement('div');
@@ -24,7 +25,11 @@ window.roller = roller;
 
         document.querySelectorAll('.-roller->div.panel').forEach(div => div.remove());
         let num;
-        if (quota > 9) {
+        if (quota > 39) {
+            num = 4;
+        } else if (quota > 30) {
+            num = quota % 3 == 0 ? 3 : 2;
+        } else if (quota > 9) {
             // double panel
             num = 2;
         } else if (quota < 6) {
@@ -39,6 +44,13 @@ window.roller = roller;
                 num = 1;
             }
         }
+        config.roller.size.some(([quota, size]) => { // eslint-disable-line no-undef
+            if (data.quota <= quota) {
+                container.style.setProperty('--font-size', `${size}em`);
+                return true;
+            }
+        });
+
         /** @type {HTMLDivElement[]} */
         const panels = new Array(num).fill().map(newPanel);
 
@@ -48,7 +60,7 @@ window.roller = roller;
             users.forEach((data, index) => {
                 const p = document.createElement('p');
                 panels[index % panels.length].appendChild(p);
-                p.textContent = `${data.name} [${data.code}]`;
+                p.textContent = config.renderUser(data); // eslint-disable-line no-undef
             });
         };
         roller.__defineSetter__('replace', (v) => { throw new Error(`"roller.replace" could not be change: ${v}`); });

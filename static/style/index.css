@@ -58,6 +58,7 @@ body::before {
 /* control */
 
 .-control- {
+    z-index: 1;
     position: fixed;
 }
 .-control->* {
@@ -123,15 +124,17 @@ body::before {
     color: #000;
     --font-size: 1.2em;
     font-size: var(--font-size);
-    line-height: 2em;
+    line-height: 1.8em;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     overflow-y: auto;
 }
 .-lottery->.gallery>* {
-    margin: 0 12px;
+    /* flex: 1 1 auto; */
+    margin: 0 16px;
+    text-decoration: underline;
 }
 
 /* roller */
@@ -139,6 +142,7 @@ body::before {
 .-roller- {
     position: fixed;
     font-size: 1.5em;
+    font-size: var(--font-size);
     text-align: center;
     display: flex;
 }
@@ -157,6 +161,7 @@ body::before {
     content: "";
 }
 .-roller->div {
+    margin: 0 16px;
     flex: 1 1 auto;
     overflow-y: auto;
     display: flex;
@@ -166,12 +171,15 @@ body::before {
 .-roller->div>* {
     margin: 0;
 }
-.-roller-.hide {
+
+.-lottery-.hide, .-roller-.hide {
     pointer-events: none;
     opacity: 0;
-    -webkit-transition: opacity 3s ease;
-    -moz-transition: opacity 3s ease;
-    transition: opacity 3s ease;
+}
+.-roller-.hide {
+    -webkit-transition: opacity 2s ease;
+    -moz-transition: opacity 2s ease;
+    transition: opacity 2s ease;
 }
 
 /* audio */

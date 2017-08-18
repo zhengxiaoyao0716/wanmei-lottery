@@ -25,8 +25,11 @@ window.lottery = lottery;
         return ele;
     })(document.createElement('p')));
 
+    let timeout;
     container.appendChild(((ele) => {
         ['load', 'hashchange'].forEach(key => addEventListener(key, () => {
+            clearTimeout(timeout);
+
             ele.textContent = '';
             const data = config.turns[Number.parseInt(location.hash.slice(1)) || 0]; // eslint-disable-line no-undef
             config.lottery.size.some(([quota, size]) => { // eslint-disable-line no-undef
@@ -44,15 +47,40 @@ window.lottery = lottery;
             users.forEach((data, index) => {
                 const p = document.createElement('p');
                 ele.appendChild(p);
-                p.textContent = `${data.name} [${data.code}]`;
+                p.textContent = config.renderUser(data); // eslint-disable-line no-undef
                 p.addEventListener('click', () => {
                     if (!confirm(`确实要替换掉 "${data.name} [${data.code}]" 吗？`)) {
                         return null;
                     }
                     data = lottery.onExchange(index);
-                    p.textContent = `${data.name} [${data.code}]`;
+                    p.textContent = config.renderUser(data); // eslint-disable-line no-undef
                 });
             });
+            const scrollBottom = ele.scrollHeight - Math.min(ele.clientHeight, ele.offsetHeight);
+            if (scrollBottom > 0) {
+                let increment = 1;
+                const scroll = () => {
+                    ele.scrollTop += increment;
+                    if (increment > 0) {
+                        if (ele.scrollTop >= scrollBottom) {
+                            increment = -1;
+                            ele.scrollTop = scrollBottom;
+                            timeout = setTimeout(scroll, 1000); // eslint-disable-line no-undef
+                            return;
+                        }
+                    } else {
+                        if (ele.scrollTop <= 0) {
+                            increment = 1;
+                            ele.scrollTop = 0;
+                            timeout = setTimeout(scroll, 1000); // eslint-disable-line no-undef
+                            return;
+                        }
+                    }
+                    timeout = setTimeout(scroll, config.lottery.freq); // eslint-disable-line no-undef
+                };
+                timeout = setTimeout(scroll, 1500);
+            }
+            window.ele = ele;
         };
         lottery.__defineSetter__('replace', (v) => { throw new Error(`"lottery.replace" could not be change: ${v}`); });
         lottery.__defineGetter__('replace', () => replace);
