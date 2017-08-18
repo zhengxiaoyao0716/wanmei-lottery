@@ -121,8 +121,9 @@ window.config = config;
     config.lottery.__defineGetter__('title', () => _title);
     // check.lottery.title
     const checkTitle = (title) => {
-        if (location.search.indexOf(`config=${encodeURIComponent(title)}`) == -1) {
-            throw new Error(`prevent to load a config because of mismatching title, title: "${title}", need: "config=${title}"`);
+        const search = decodeURIComponent(location.search);
+        if (search.indexOf(`config=${title}`) == -1) {
+            throw new Error(`prevent to load a config because of mismatching title, title: "${title}", found: "${search}"`);
         }
         _title = title;
     };

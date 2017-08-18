@@ -78,11 +78,12 @@ const unitTests = {
             if (!confirm('本轮已抽取过了，确定要重新抽取吗？')) {
                 return;
             }
+            result[turnData.name].forEach(d => dataset.push(d));
         }
-
         document.querySelector('#lottery').classList.add('hide');
         document.querySelector('#roller').classList.remove('hide');
         sorted = reorder(dataset);
+        record[record.length - 1].name = turnData.name;
         let timestamp;
         rollerTimer = timer(config.roller.freq, () => {
             rollerSE.play();
