@@ -126,6 +126,7 @@ window.config = config;
             throw new Error(`prevent to load a config because of mismatching title, title: "${title}", found: "${search}"`);
         }
         _title = title;
+        console.info(title);
     };
     config.lottery.__defineSetter__('title', checkTitle);
 }
@@ -143,6 +144,7 @@ window.config = config;
     config.__defineSetter__('turns', (turns) => {
         checkTurns(turns);
         config.__defineGetter__('turns', () => turns);
+        console.info('共计', turns.reduce((l, r) => l + r.quota, 0), '个抽奖名额');
     });
     checkTurns(config.turns);
 }
@@ -160,6 +162,7 @@ window.config = config;
     config.__defineSetter__('dataset', (dataset) => {
         checkDataset(dataset);
         config.__defineGetter__('dataset', () => dataset);
+        console.info('共计', dataset.length, '人参与抽奖');
     });
     checkDataset(config.dataset);
 }
