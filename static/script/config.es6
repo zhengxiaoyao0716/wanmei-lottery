@@ -104,6 +104,19 @@ const config = { // eslint-disable-line no-unused-vars
 window.config = config;
 
 {
+    // check.lottery.title
+    const checkTitle = (title) => {
+        if (location.search.indexOf(`config=${encodeURIComponent(title)}`) == -1) {
+            throw new Error(`prevent to load a config because of mismatching title, title: "${title}", need: "config=${title}"`);
+        }
+    };
+    config.lottery.__defineSetter__('title', (title) => {
+        checkTitle(title);
+        config.lottery.__defineGetter__('title', () => title);
+    });
+}
+
+{
     // check.turns
     const checkTurns = (turns) => {
         const names = new Set();
