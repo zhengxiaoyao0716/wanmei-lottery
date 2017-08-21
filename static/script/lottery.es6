@@ -49,10 +49,15 @@ window.lottery = lottery;
                 ele.appendChild(p);
                 p.textContent = config.renderUser(data); // eslint-disable-line no-undef
                 p.addEventListener('click', () => {
-                    if (!confirm(`确实要替换掉 "${data.name} [${data.code}]" 吗？`)) {
+                    // unsafe, use `prompt` instead.
+                    // if (!confirm(`确实要替换掉 "${data.name} [${data.code}]" 吗？`)) {
+                    //     return null;
+                    // }
+                    if (prompt(`确实要替换掉 "${data.name} [${data.code}]" ？请验证：`, '输入中括号中的内容') !== data.code) {
                         return null;
                     }
                     data = lottery.onExchange(index);
+                    p.style.color = '#f00';
                     p.textContent = config.renderUser(data); // eslint-disable-line no-undef
                 });
             });

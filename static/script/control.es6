@@ -46,13 +46,17 @@ window.control = control;
     const stop = container.querySelector('#stop');
     keyControl[KeyCode.space] = () => start.click();
     start.addEventListener('click', () => {
-        control.onStart(turn);
+        if (control.onStart(turn) === false) {
+            return;
+        }
         keyControl[KeyCode.space] = () => stop.click();
         start.classList.add('hide');
         stop.classList.remove('hide');
     });
     stop.addEventListener('click', () => {
-        control.onStop(turn);
+        if (control.onStop(turn) === false) {
+            return;
+        }
         keyControl[KeyCode.space] = () => start.click();
         stop.classList.add('hide');
         start.classList.remove('hide');

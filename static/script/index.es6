@@ -6,7 +6,26 @@
 
 const unitTests = {
     dataset: config.dataset, // eslint-disable-line no-undef
-    analyze: (codesList) => { console.log(codesList); },
+    analyze: (codesList) => {
+        const analyze = {
+            codeTimes: {},
+            indexCodes: {},
+        };
+        for (const codes of codesList) {
+            codes.forEach((code, index) => {
+                if (analyze.codeTimes[code] == null) {
+                    analyze.codeTimes[code] = 0;
+                }
+                analyze.codeTimes[code]++;
+
+                if (analyze.indexCodes[index] == null) {
+                    analyze.indexCodes[index] = [];
+                }
+                analyze.indexCodes[index].push(code);
+            });
+        }
+        return analyze;
+    },
 };
 
 {
@@ -21,10 +40,10 @@ const unitTests = {
         const random = new Math.seedrandom(seed);
 
         const sorted = dataset.filter(v => v != null).map(v => [random(), v]);
-        sorted.sort((l, r) => l[0] < r[0]);
+        sorted.sort((l, r) => l[0] - r[0]); // (l < r) => (l < r ? true : false) => (l < r ? 1 : 0)
         return sorted.map(v => v[1]);
     };
-    unitTests.reorder = (times) => new Array(times || 20).fill().map(() => reorder(unitTests.dataset).map(v => v.code));
+    unitTests.reorder = (times) => new Array(times || 10000).fill().map(() => reorder(unitTests.dataset).map(v => v.code));
 
     const sample = (dataset, size, seed) => {
         if (size >= dataset.length) {
@@ -39,7 +58,8 @@ const unitTests = {
     };
     unitTests.sample = (times, size) => {
         const dataset = reorder(unitTests.dataset);
-        return new Array(times || 20).fill().map(() => sample(dataset, size || 3, new Date().getTime()).map(v => v.name));
+        const timestamp = new Date().getTime();
+        return new Array(times || 10000).fill().map((_, index) => sample(dataset, size || 3, timestamp + index).map(v => v.code));
     };
 
     const timer = function (freq, run, end) {
@@ -59,7 +79,7 @@ const unitTests = {
     };
     unitTests.timer = (freq) => {
         let timestamp;
-        timer(freq || 500, () => {
+        return timer(freq || 500, () => {
             timestamp = new Date().getTime();
             console.log('run:', timestamp);
         }, () => {
@@ -75,8 +95,12 @@ const unitTests = {
         const turnData = config.turns[turn];
         if (result[turnData.name]) {
             lottery.replace(...result[turnData.name]);
-            if (!confirm('本轮已抽取过了，确定要重新抽取吗？')) {
-                return;
+            // unsafe, use `prompt` instead.
+            // if (!confirm('本轮已抽取过了，确定要重新抽取吗？')) {
+            //     return;
+            // }
+            if (prompt('本轮已抽取过了，如果要重新抽取，请验证：', '输入本轮中奖名额') !== String(turnData.quota)) {
+                return false;
             }
             result[turnData.name].forEach(d => dataset.push(d));
         }
@@ -120,7 +144,7 @@ const unitTests = {
     };
     control.onStop = (turn) => { // eslint-disable-line no-unused-vars
         if (!rollerTimer) {
-            return;
+            return false;
         }
         document.querySelector('#lottery').classList.remove('hide');
         document.querySelector('#roller').classList.add('hide');
