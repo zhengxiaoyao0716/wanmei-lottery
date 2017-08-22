@@ -96,12 +96,12 @@ const unitTests = {
         if (result[turnData.name]) {
             lottery.replace(...result[turnData.name]);
             // unsafe, use `prompt` instead.
-            // if (!confirm('本轮已抽取过了，确定要重新抽取吗？')) {
-            //     return;
-            // }
-            if (prompt('本轮已抽取过了，如果要重新抽取，请验证：', '输入本轮中奖名额') !== String(turnData.quota)) {
-                return false;
+            if (!confirm('本轮已抽取过了，确定要重新抽取吗？')) {
+                return;
             }
+            // if (prompt('本轮已抽取过了，如果要重新抽取，请验证：', '输入本轮中奖名额') !== String(turnData.quota)) {
+            //     return false;
+            // }
             result[turnData.name].forEach(d => dataset.push(d));
         }
         document.querySelector('#lottery').classList.add('hide');
