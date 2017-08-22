@@ -57,6 +57,10 @@ window.lottery = lottery;
                     //     return null;
                     // }
                     data = lottery.onExchange(index);
+                    if (!data) {
+                        alert('替换失败，已经没有没中奖的人了');
+                        return null;
+                    }
                     p.style.color = '#f00';
                     p.textContent = config.renderUser(data); // eslint-disable-line no-undef
                 });

@@ -123,9 +123,17 @@ const unitTests = {
 
             // substrate repeat.
             const codeSet = new Set(users.map(data => data.code));
-            dataset.forEach((data, index) => data != null && codeSet.has(data.code) && (dataset[index] = null));
+            const substrate = () => {
+                dataset.forEach((data, index) => data != null && codeSet.has(data.code) && (dataset[index] = null));
+                sorted.forEach((data, index) => data != null && codeSet.has(data.code) && (sorted[index] = null));
+                sorted = sorted.filter((data) => data != null);
+            };
+            substrate();
 
             lottery.onExchange = (index) => {
+                if (!sorted.length) {
+                    return false;
+                }
                 // exchange
                 const timestamp = new Date().getTime();
                 const user = sample(sorted, 1, timestamp)[0];
@@ -135,8 +143,8 @@ const unitTests = {
                 users[index] = user;
 
                 // substrate repeat.
-                codeSet.add(user);
-                dataset.forEach((data, index) => data != null && codeSet.has(data.code) && (dataset[index] = null));
+                codeSet.add(user.code);
+                substrate();
 
                 return user;
             };
