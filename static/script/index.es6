@@ -178,7 +178,7 @@ const unitTests = {
             const backup = ${JSON.stringify(backup)};
 
             // valid seed
-            ((random) => backup.check.forEach(v => { if (v != random()) { throw new Error('valid seed failed'); } }))(new Math.seedrandom(backup.seed));
+            ((random) => backup.check.forEach(v => { if (v != random()) { throw new Error('valid seed failed'); } }))(new Math.seedrandom(backup.mSeed));
         `], { type: 'application/x-javascript;charset=utf-8' }));
         a.click();
 
