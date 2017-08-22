@@ -47,7 +47,7 @@ const unitTests = {
 
     const sample = (dataset, size, seed) => {
         if (size >= dataset.length) {
-            return dataset;
+            return dataset.slice();
         }
         const random = new Math.seedrandom(seed);
         const ids = new Set();
