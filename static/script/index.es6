@@ -46,10 +46,12 @@ const unitTests = {
     unitTests.reorder = (times) => new Array(times || 10000).fill().map(() => reorder(unitTests.dataset).map(v => v.code));
 
     const sample = (dataset, size, seed) => {
-        if (size >= dataset.length) {
-            return dataset.slice();
-        }
         const random = new Math.seedrandom(seed);
+        if (size >= dataset.length) {
+            const sorted = dataset.map(v => [random(), v]);
+            sorted.sort((l, r) => l[0] - r[0]); // (l < r) => (l < r ? true : false) => (l < r ? 1 : 0)
+            return sorted.map(v => v[1]);
+        }
         const ids = new Set();
         while (ids.size < size) {
             ids.add(parseInt(random() * dataset.length));
