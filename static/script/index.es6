@@ -137,7 +137,7 @@ const unitTests = {
                 // exchange
                 const timestamp = new Date().getTime();
                 const user = sample(sorted, 1, timestamp)[0];
-                record[record.length - 1][`exchange_${index}`] = { timestamp };
+                record[record.length - 1][`exchange_${result[turnData.name][index].code}_${index}`] = { timestamp };
                 result[`${turnData.name}_exchange`] = result[`${turnData.name}_exchange`] || [];
                 result[`${turnData.name}_exchange`].push(user);
                 users[index] = user;
